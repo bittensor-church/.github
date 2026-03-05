@@ -7,7 +7,7 @@ simulations, and smart contracts that power the decentralized AI foundry.
 
 ### opentensor github org
 
-| Category (2025+) | Open | Merged | Closed | Total |
+| | Open | Merged | Closed | Total |
 | --- | ---: | ---: | ---: | ---: |
 | Authored | 8 | 53 | 17 | 78 |
 | Involved (Not Authored) | 10 | 44 | 8 | 62 |
@@ -15,7 +15,7 @@ simulations, and smart contracts that power the decentralized AI foundry.
 
 ### bittensor-church github org
 
-| Category (2025+) | Open | Merged | Closed | Total |
+| | Open | Merged | Closed | Total |
 | --- | ---: | ---: | ---: | ---: |
 | Total | 18 | 231 | 24 | 273 |
 
