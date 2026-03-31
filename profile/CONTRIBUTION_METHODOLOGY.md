@@ -1,6 +1,6 @@
 # Contribution Methodology (Refresh Guide)
 
-This document explains how contribution numbers in `README.md` are calculated and how to refresh them later.
+This document explains how authored PR numbers in `README.md` are calculated and how to refresh them later.
 
 ## Scope
 
@@ -16,24 +16,19 @@ This document explains how contribution numbers in `README.md` are calculated an
 
 ## OpenTensor Calculation Logic
 
-We collect PR interaction sets per user using GitHub search:
+We collect authored PR sets per user using GitHub search:
 
 ```bash
 gh search prs --author <user> --owner opentensor --limit 200 --json number,title,url,state,createdAt,repository
-gh search prs --reviewed-by <user> --owner opentensor --limit 200 --json number,title,url,state,createdAt,repository
-gh search prs --commenter <user> --owner opentensor --limit 200 --json number,title,url,state,createdAt,repository
-gh search prs --involves <user> --owner opentensor --limit 200 --json number,title,url,state,createdAt,repository
 ```
 
 For each PR, we use a stable key:
 
 - `<repo>#<number>` (example: `opentensor/subtensor#2462`)
 
-Then we classify de-duplicated team contributions:
+Then we classify de-duplicated team-authored contributions:
 
 - `Authored`: PR is authored by at least one team member.
-- `Involved (Not Authored)`: PR is not team-authored, but at least one team member reviewed/commented/involved.
-- `Total`: union of all team-touched PRs (authored + non-authored involvement).
 
 State buckets are from GitHub PR `state`:
 
@@ -47,13 +42,10 @@ Time filter for README:
 
 README OpenTensor table values should be computed directly from query output:
 
-- Build a deduplicated PR key set per category using `<repo>#<number>`.
+- Build a deduplicated authored PR key set using `<repo>#<number>`.
 - Filter to `createdAt >= 2025-01-01`.
 - Count by state (`open`, `merged`, `closed`) and total.
-- Fill README rows:
-  - `Authored`
-  - `Involved (Not Authored)`
-  - `Total`
+- Fill the README `Authored` row.
 
 ## bittensor-church Calculation Logic
 
@@ -85,7 +77,6 @@ README bittensor-church table values should be computed directly from API output
 README includes OpenTensor repo-level GitHub links for:
 
 - `Authored by team`
-- `All interactions by team, including authored`
 
 Important constraints:
 
@@ -102,17 +93,15 @@ Reason:
 - The authored `btcli` search link can include at least one PR not belonging to the intended team-authored set.
 - Direct example: `https://github.com/opentensor/btcli/pulls?q=is%3Apr+403` also shows another PR that is not authored by our team.
 
-In `All interactions`, `btcli` remains included because that section intentionally tracks any team interaction, not only authorship.
-
 ## Refresh Checklist
 
 1. Re-run OpenTensor queries for all team members.
-2. Compute OpenTensor 2025+ counts directly from raw query output.
+2. Compute OpenTensor 2025+ authored counts directly from raw query output.
 3. Re-run bittensor-church org API collection and compute 2025+ counts directly.
 4. Update `README.md`:
-   - opentensor `2025+` table
+   - opentensor `2025+` authored row
    - bittensor-church `2025+` table
-   - OpenTensor link lists
+   - OpenTensor authored link list
 5. Verify links in browser:
    - especially long `bittensor` links and any `btcli` authored link behavior
 6. Commit changes.
