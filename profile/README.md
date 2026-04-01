@@ -29,3 +29,7 @@ Authored by team (all opentensor repos):
 - `opentensor/bittensor-subnet-template`: https://github.com/opentensor/bittensor-subnet-template/pulls?q=is%3Apr+154
 - `opentensor/subnet-template`: https://github.com/opentensor/subnet-template/pulls?q=is%3Apr+2+3
 - `opentensor/subtensor`: https://github.com/opentensor/subtensor/pulls?q=is%3Apr+1160+1728+1729+1758+1819+1952+2202+2209+2240+2315+2358+2385+2414+2420+2460+2462
+
+### Bittensor-church repos
+
+See [here](https://github.com/orgs/bittensor-church/repositories)
