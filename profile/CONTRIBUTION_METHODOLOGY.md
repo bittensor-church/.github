@@ -5,9 +5,9 @@ This document explains how authored PR numbers in `README.md` are calculated and
 ## Scope
 
 - Timeframe for README stats: `2025+` (from `2025-01-01` onward).
-- Organizations covered:
-  - `opentensor`
-  - `bittensor-church`
+- Repository sets covered:
+  - Current `opentensor` repositories and the former OpenTensor repositories listed below
+  - Visible `bittensor-church` repositories
 - Team members currently included in OpenTensor calculations:
   - `ppolewicz`
   - `andreea-popescu-reef`
@@ -16,15 +16,24 @@ This document explains how authored PR numbers in `README.md` are calculated and
 
 ## OpenTensor Calculation Logic
 
-We collect authored PR sets per user using GitHub search:
+We collect authored PR sets per user using GitHub search. Several former
+`opentensor` repositories have moved, so search both current and former owners:
 
 ```bash
 gh search prs --author <user> --owner opentensor --limit 200 --json number,title,url,state,createdAt,repository
+gh search prs --author <user> --owner RaoFoundation --limit 200 --json number,title,url,state,createdAt,repository
+gh search prs --author <user> --repo latent-to/subnet-template --limit 200 --json number,title,url,state,createdAt,repository
 ```
+
+Include all current `opentensor` repositories. Of results under other owners,
+include only these former OpenTensor repositories: `RaoFoundation/async-substrate-interface`,
+`RaoFoundation/bittensor`, `RaoFoundation/bittensor-subnet-template`,
+`RaoFoundation/btcli`, `RaoFoundation/subtensor`, and `latent-to/subnet-template`.
+Check redirects from existing README links when refreshing this list.
 
 For each PR, we use a stable key:
 
-- `<repo>#<number>` (example: `opentensor/subtensor#2462`)
+- `<current repo>#<number>` (example: `RaoFoundation/subtensor#2462`)
 
 Then we classify de-duplicated team-authored contributions:
 
@@ -54,7 +63,7 @@ This is org-level (not split by user).
 1. List visible repositories:
 
 ```bash
-gh repo list bittensor-church --limit 100 --json nameWithOwner,name,isPrivate,isArchived
+gh repo list bittensor-church --limit 1000 --json nameWithOwner,name,isPrivate,isArchived
 ```
 
 2. For each repo, fetch all visible PRs:
@@ -63,7 +72,7 @@ gh repo list bittensor-church --limit 100 --json nameWithOwner,name,isPrivate,is
 gh api --paginate "repos/bittensor-church/<repo>/pulls?state=all&per_page=100"
 ```
 
-3. Count `open` / `merged` / `closed` by `created_at` bucket.
+3. Count `merged` when `merged_at` is set; otherwise use `state` (`open` or `closed`).
 4. For README, aggregate `2025` + `2026` into `2025+`.
 
 README bittensor-church table values should be computed directly from API output:
@@ -95,7 +104,7 @@ Reason:
 
 ## Refresh Checklist
 
-1. Re-run OpenTensor queries for all team members.
+1. Re-run OpenTensor and transferred-repo queries for all team members.
 2. Compute OpenTensor 2025+ authored counts directly from raw query output.
 3. Re-run bittensor-church org API collection and compute 2025+ counts directly.
 4. Update `README.md`:
@@ -104,4 +113,4 @@ Reason:
    - OpenTensor authored link list
 5. Verify links in browser:
    - especially long `bittensor` links and any `btcli` authored link behavior
-6. Commit changes.
+6. Review `git diff` before committing.
