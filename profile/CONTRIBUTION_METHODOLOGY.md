@@ -95,9 +95,9 @@ Important constraints:
 
 ### btcli caveat
 
-Use the `RaoFoundation/btcli` PR-list search filtered by author and creation
-date. It currently returns only PR #403. A numeric search for `403` also
-shows a PR outside the team-authored set, so that search URL is misleading.
+Search the `RaoFoundation/btcli` PR list for `403`, filtered by author and
+creation date. It currently returns only PR #403. Searching for `403` alone
+also shows a PR outside the team-authored set.
 
 ## Refresh Checklist
 
