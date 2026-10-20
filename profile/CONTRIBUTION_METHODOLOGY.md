@@ -83,7 +83,7 @@ README bittensor-church table values should be computed directly from API output
 
 ## Link Generation Rules (README) 
 
-README includes OpenTensor repo-level GitHub links for:
+README includes links for every counted OpenTensor-origin team PR under:
 
 - `Authored by team`
 
@@ -95,12 +95,8 @@ Important constraints:
 
 ### btcli caveat
 
-In the `Authored by team` section, `btcli` is intentionally **excluded**.
-
-Reason:
-
-- The authored `btcli` search link can include at least one PR not belonging to the intended team-authored set.
-- Direct example: `https://github.com/opentensor/btcli/pulls?q=is%3Apr+403` also shows another PR that is not authored by our team.
+Link `RaoFoundation/btcli#403` directly. A numeric search for `403` also
+shows a PR outside the team-authored set, so the search URL is misleading.
 
 ## Refresh Checklist
 
